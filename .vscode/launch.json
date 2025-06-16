@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug app.elf",
+            "type": "cortex-debug",
+            "request": "launch",
+            "runToEntryPoint": "main",
+            "servertype": "openocd",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/.build/project/app.elf",
+            "interface": "swd",
+            "svdFile": "${workspaceFolder}/openocd/stm32f303.svd",
+            "configFiles": [
+                "${workspaceFolder}/openocd/stm32f303.cfg"
+            ],
+        },
+    ]
+}

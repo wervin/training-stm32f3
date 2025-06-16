@@ -1,0 +1,7 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}",
+    "cmake.buildDirectory": "${workspaceFolder}/.build",
+    // "cortex-debug.armToolchainPath": "${workspaceFolder/.build/arm-toolchain/lib/clang-runtimes",
+    // "cortex-debug.armToolchainPrefix": "arm-none-eabi"
+    "cortex-debug.gdbPath": "gdb-multiarch"
+}

@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "name": "App",
+            "compileCommands": [
+                "${workspaceFolder}/.build/compile_commands.json"
+            ],
+            "compilerPath": "${workspaceFolder}/.build/arm-toolchain/bin/clang",
+            "intelliSenseMode": "linux-clang-arm"
+        }
+    ],
+    "version": 4
+}

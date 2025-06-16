@@ -1,0 +1,10 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Flash app.elf",
+            "type": "shell",
+            "command": "openocd -s openocd -f openocd/stm32f303.cfg -c \"program .build/project/app.elf verify reset exit\""
+        }
+    ]
+}
