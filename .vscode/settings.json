@@ -1,9 +1,4 @@
 {
-    // "C_Cpp.files.exclude": {
-    //     "${workspaceFolder}/.git": true,
-    //     "${workspaceFolder}/.build": true
-    // },
-    // "C_Cpp.exclusionPolicy": "checkFolders",
     "cmake.sourceDirectory": "${workspaceFolder}",
     "cmake.buildDirectory": "${workspaceFolder}/.build",
     "cortex-debug.gdbPath": "gdb-multiarch",
@@ -12,7 +7,6 @@
         "*.h": "c",
         "*.c": "c",
         "*.css": "tailwindcss",
-        "unordered_map": "c",
-        "cstdint": "c"
-    }
+        "initializer_list": "c"
+    },
 }

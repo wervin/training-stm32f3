@@ -7,13 +7,19 @@
 static void _config_system_clock(void);
 static void _config_io(void);
 
+static uint32_t stack0[128] = {0};
 static uint32_t stack1[128] = {0};
 static uint32_t stack2[128] = {0};
 
-void delay(uint32_t delay)
+void task0(void)
 {
-    while (delay)
-        delay--;
+    while (1)
+    {
+        __disable_irq();
+        GPIOE->ODR ^= LL_IO_PIN_15;
+        __enable_irq();
+        os_delay(250);
+    }
 }
 
 void task1(void)
@@ -21,9 +27,9 @@ void task1(void)
     while (1)
     {
         __disable_irq();
-        GPIOE->ODR ^= LL_IO_PIN_15;
+        GPIOE->ODR ^= LL_IO_PIN_14;
         __enable_irq();
-        delay(1000000);
+        os_delay(500);
     }
 }
 
@@ -32,9 +38,9 @@ void task2(void)
     while (1)
     {
         __disable_irq();
-        GPIOE->ODR ^= LL_IO_PIN_14;
+        GPIOE->ODR ^= LL_IO_PIN_13;
         __enable_irq();
-        delay(500000);
+        os_delay(1000);
     }
 }
 
@@ -43,6 +49,7 @@ int main(void)
     _config_system_clock();
     _config_io();
 
+    os_create_thread(task0, stack0, 128);
     os_create_thread(task1, stack1, 128);
     os_create_thread(task2, stack2, 128);
     os_launch();
