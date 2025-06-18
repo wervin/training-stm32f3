@@ -204,7 +204,7 @@ static inline void ll_io_set_pull(GPIO_TypeDef *port, uint32_t pin, uint32_t pul
  */
 __STATIC_INLINE void ll_io_set_pin(GPIO_TypeDef *gpio, uint32_t pin)
 {
-    WRITE_REG(gpio->BSRR, pin);
+    gpio->BSRR = pin;
 }
 
 /**
@@ -232,7 +232,35 @@ __STATIC_INLINE void ll_io_set_pin(GPIO_TypeDef *gpio, uint32_t pin)
  */
 __STATIC_INLINE void ll_io_clear_pin(GPIO_TypeDef *gpio, uint32_t pin)
 {
-    WRITE_REG(gpio->BRR, pin);
+    gpio->BRR = pin;
+}
+
+/**
+ * @brief  Toggle several pins to low level on dedicated gpio port.
+ * @param  gpio GPIO Port
+ * @param  pin This parameter can be a combination of the following values:
+ *         @arg @ref LL_IO_PIN_0
+ *         @arg @ref LL_IO_PIN_1
+ *         @arg @ref LL_IO_PIN_2
+ *         @arg @ref LL_IO_PIN_3
+ *         @arg @ref LL_IO_PIN_4
+ *         @arg @ref LL_IO_PIN_5
+ *         @arg @ref LL_IO_PIN_6
+ *         @arg @ref LL_IO_PIN_7
+ *         @arg @ref LL_IO_PIN_8
+ *         @arg @ref LL_IO_PIN_9
+ *         @arg @ref LL_IO_PIN_10
+ *         @arg @ref LL_IO_PIN_11
+ *         @arg @ref LL_IO_PIN_12
+ *         @arg @ref LL_IO_PIN_13
+ *         @arg @ref LL_IO_PIN_14
+ *         @arg @ref LL_IO_PIN_15
+ *         @arg @ref LL_IO_PIN_ALL
+ * @retval None
+ */
+__STATIC_INLINE void ll_io_toggle_pin(GPIO_TypeDef *gpio, uint32_t pin)
+{
+    gpio->ODR ^= pin;
 }
 
 #endif /* LL_IO_H */

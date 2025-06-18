@@ -1,3 +1,7 @@
-# Get Started
+# Training with STM32F3 DISCO
 
-openocd -s openocd -f target.cfg -c "program prj/STM32CubeF3_Demo_STM32F3-DISCOVERY.hex verify reset exit"
+Simple repository for saving experiments I made on the STM32F3 DISCO for learning purposes.
+
+Toolchain: LLVM toolchain for Arm
+Build system: CMake
+Debuggign tooling: openocd + cortex-debug vscode extension

@@ -32,8 +32,11 @@ set(DEFINITIONS
 
 # Sources
 set(SOURCES
+    isr.c
     main.c
+    os.c
     startup.c
+    ll/rcc.c
 )
 
 # Includes
