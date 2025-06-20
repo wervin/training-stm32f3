@@ -21,30 +21,105 @@
 #define LL_BUS_AHB1_GRP1_PERIPH_ADC12 RCC_AHBENR_ADC12EN
 #define LL_BUS_AHB1_GRP1_PERIPH_ADC34 RCC_AHBENR_ADC34EN
 
+#define LL_APB1_GRP1_PERIPH_ALL 0xFFFFFFFFU
+#define LL_APB1_GRP1_PERIPH_TIM2 RCC_APB1ENR_TIM2EN
+#define LL_APB1_GRP1_PERIPH_TIM3 RCC_APB1ENR_TIM3EN
+#define LL_APB1_GRP1_PERIPH_TIM4 RCC_APB1ENR_TIM4EN
+#define LL_APB1_GRP1_PERIPH_TIM6 RCC_APB1ENR_TIM6EN
+#define LL_APB1_GRP1_PERIPH_TIM7 RCC_APB1ENR_TIM7EN
+#define LL_APB1_GRP1_PERIPH_WWDG RCC_APB1ENR_WWDGEN
+#define LL_APB1_GRP1_PERIPH_SPI2 RCC_APB1ENR_SPI2EN
+#define LL_APB1_GRP1_PERIPH_SPI3 RCC_APB1ENR_SPI3EN
+#define LL_APB1_GRP1_PERIPH_USART2 RCC_APB1ENR_USART2EN
+#define LL_APB1_GRP1_PERIPH_USART3 RCC_APB1ENR_USART3EN
+#define LL_APB1_GRP1_PERIPH_UART4 RCC_APB1ENR_UART4EN
+#define LL_APB1_GRP1_PERIPH_UART5 RCC_APB1ENR_UART5EN
+#define LL_APB1_GRP1_PERIPH_I2C1 RCC_APB1ENR_I2C1EN
+#define LL_APB1_GRP1_PERIPH_I2C2 RCC_APB1ENR_I2C2EN
+#define LL_APB1_GRP1_PERIPH_USB RCC_APB1ENR_USBEN
+#define LL_APB1_GRP1_PERIPH_CAN RCC_APB1ENR_CANEN
+#define LL_APB1_GRP1_PERIPH_PWR RCC_APB1ENR_PWREN
+#define LL_APB1_GRP1_PERIPH_DAC1 RCC_APB1ENR_DAC1EN
+
+#define LL_APB2_GRP1_PERIPH_ALL 0xFFFFFFFFU
+#define LL_APB2_GRP1_PERIPH_SYSCFG RCC_APB2ENR_SYSCFGEN
+#define LL_APB2_GRP1_PERIPH_TIM1 RCC_APB2ENR_TIM1EN
+#define LL_APB2_GRP1_PERIPH_SPI1 RCC_APB2ENR_SPI1EN
+#define LL_APB2_GRP1_PERIPH_TIM8 RCC_APB2ENR_TIM8EN
+#define LL_APB2_GRP1_PERIPH_USART1 RCC_APB2ENR_USART1EN
+#define LL_APB2_GRP1_PERIPH_TIM15 RCC_APB2ENR_TIM15EN
+#define LL_APB2_GRP1_PERIPH_TIM16 RCC_APB2ENR_TIM16EN
+#define LL_APB2_GRP1_PERIPH_TIM17 RCC_APB2ENR_TIM17EN
+
 /**
  * @brief  Enable AHB1 peripherals clock.
  * @param  peripherals This parameter can be a combination of the following values:
  *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_DMA1
- *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_DMA2 (*)
+ *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_DMA2
  *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_SRAM
  *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_FLASH
- *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_FMC (*)
  *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_CRC
  *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_GPIOA
  *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_GPIOB
  *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_GPIOC
  *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_GPIOD
- *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_GPIOE (*)
+ *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_GPIOE
  *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_GPIOF
  *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_TSC
- *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_ADC1 (*)
- *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_ADC12 (*)
- *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_ADC34 (*)
+ *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_ADC1
+ *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_ADC12
+ *         @arg @ref LL_BUS_AHB1_GRP1_PERIPH_ADC34
  * @retval None
  */
 static inline void ll_bus_ahb1_grp1_enable_clock(uint32_t peripherals)
 {
     SET_BIT(RCC->AHBENR, peripherals);
+}
+
+/**
+ * @brief  Enable APB1 peripherals clock.
+ * @param  peripherals This parameter can be a combination of the following values:
+ *         @arg @ref LL_APB1_GRP1_PERIPH_TIM2
+ *         @arg @ref LL_APB1_GRP1_PERIPH_TIM3
+ *         @arg @ref LL_APB1_GRP1_PERIPH_TIM4
+ *         @arg @ref LL_APB1_GRP1_PERIPH_TIM6
+ *         @arg @ref LL_APB1_GRP1_PERIPH_TIM7
+ *         @arg @ref LL_APB1_GRP1_PERIPH_WWDG
+ *         @arg @ref LL_APB1_GRP1_PERIPH_SPI2
+ *         @arg @ref LL_APB1_GRP1_PERIPH_SPI3
+ *         @arg @ref LL_APB1_GRP1_PERIPH_USART2
+ *         @arg @ref LL_APB1_GRP1_PERIPH_USART3
+ *         @arg @ref LL_APB1_GRP1_PERIPH_UART4
+ *         @arg @ref LL_APB1_GRP1_PERIPH_UART5
+ *         @arg @ref LL_APB1_GRP1_PERIPH_I2C1
+ *         @arg @ref LL_APB1_GRP1_PERIPH_I2C2
+ *         @arg @ref LL_APB1_GRP1_PERIPH_USB
+ *         @arg @ref LL_APB1_GRP1_PERIPH_CAN
+ *         @arg @ref LL_APB1_GRP1_PERIPH_PWR
+ *         @arg @ref LL_APB1_GRP1_PERIPH_DAC1
+ * @retval None
+ */
+__STATIC_INLINE void ll_bus_apb1_grp1_enable_clock(uint32_t peripherals)
+{
+    SET_BIT(RCC->APB1ENR, peripherals);
+}
+
+/**
+ * @brief  Enable APB2 peripherals clock.
+ * @param  peripherals This parameter can be a combination of the following values:
+ *         @arg @ref LL_APB2_GRP1_PERIPH_SYSCFG
+ *         @arg @ref LL_APB2_GRP1_PERIPH_TIM1
+ *         @arg @ref LL_APB2_GRP1_PERIPH_SPI1
+ *         @arg @ref LL_APB2_GRP1_PERIPH_TIM8
+ *         @arg @ref LL_APB2_GRP1_PERIPH_USART1
+ *         @arg @ref LL_APB2_GRP1_PERIPH_TIM15
+ *         @arg @ref LL_APB2_GRP1_PERIPH_TIM16
+ *         @arg @ref LL_APB2_GRP1_PERIPH_TIM17
+ * @retval None
+ */
+__STATIC_INLINE void ll_bus_apb2_grp1_enable_clock(uint32_t peripherals)
+{
+    SET_BIT(RCC->APB2ENR, peripherals);
 }
 
 #endif /* LL_BUS_H */

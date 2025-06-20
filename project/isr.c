@@ -1,5 +1,6 @@
 #include "stm32f3.h"
 #include "os.h"
+#include "ll/usart.h"
 
 extern uint32_t *task_sp;
 
@@ -37,7 +38,7 @@ __attribute__((naked)) void irq_handler_pend_sv(void)
 {
     __asm volatile("push    {lr}");
     __asm volatile("mrs     r3, psp");
-    __asm volatile("stmdb   r3!, {r4-r11}"); 
+    __asm volatile("stmdb   r3!, {r4-r11}");
 
     __asm volatile("bl      os_get_context");
     __asm volatile("ldr     r1, [r0, #0x64]");
@@ -65,4 +66,9 @@ void irq_handler_sys_tick(void)
 {
     os_schedule();
     SCB->ICSR |= SCB_ICSR_PENDSVSET_Msk;
+}
+
+void irq_handler_usart1(void)
+{
+    ll_usart_handler(USART1);
 }

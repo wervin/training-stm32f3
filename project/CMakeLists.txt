@@ -35,8 +35,10 @@ set(SOURCES
     isr.c
     main.c
     os.c
+    port.c
     startup.c
     ll/rcc.c
+    ll/usart.c
 )
 
 # Includes

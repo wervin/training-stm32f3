@@ -6,76 +6,99 @@
 #include "stm32f3.h"
 #include "utils.h"
 
-#define LL_RCC_HSE_VALUE 8000000U /*!< Value of the HSE oscillator in Hz */
-#define LL_RCC_HSI_VALUE 8000000U /*!< Value of the HSI oscillator in Hz */
-#define LL_RCC_LSE_VALUE 32768U   /*!< Value of the LSE oscillator in Hz */
-#define LL_RCC_LSI_VALUE 40000U   /*!< Value of the LSI oscillator in Hz */
+#define LL_RCC_HSE_VALUE 8000000U /* Value of the HSE oscillator in Hz */
+#define LL_RCC_HSI_VALUE 8000000U /* Value of the HSI oscillator in Hz */
+#define LL_RCC_LSE_VALUE 32768U   /* Value of the LSE oscillator in Hz */
+#define LL_RCC_LSI_VALUE 40000U   /* Value of the LSI oscillator in Hz */
 
-#define LL_RCC_PLLSOURCE_NONE 0x00000000U                                                 /*!< No clock selected as main PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE RCC_CFGR_PLLSRC_HSE_PREDIV                                   /*!< HSE/PREDIV clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSI_DIV_2 RCC_CFGR_PLLSRC_HSI_DIV2                               /*!< HSI clock divided by 2 selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_1 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV1)   /*!< HSE clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_2 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV2)   /*!< HSE/2 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_3 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV3)   /*!< HSE/3 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_4 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV4)   /*!< HSE/4 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_5 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV5)   /*!< HSE/5 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_6 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV6)   /*!< HSE/6 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_7 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV7)   /*!< HSE/7 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_8 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV8)   /*!< HSE/8 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_9 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV9)   /*!< HSE/9 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_10 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV10) /*!< HSE/10 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_11 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV11) /*!< HSE/11 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_12 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV12) /*!< HSE/12 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_13 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV13) /*!< HSE/13 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_14 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV14) /*!< HSE/14 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_15 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV15) /*!< HSE/15 clock selected as PLL entry clock source */
-#define LL_RCC_PLLSOURCE_HSE_DIV_16 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV16) /*!< HSE/16 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_NONE 0x00000000U                                                 /* No clock selected as main PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE RCC_CFGR_PLLSRC_HSE_PREDIV                                   /* HSE/PREDIV clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSI_DIV_2 RCC_CFGR_PLLSRC_HSI_DIV2                               /* HSI clock divided by 2 selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_1 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV1)   /* HSE clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_2 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV2)   /* HSE/2 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_3 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV3)   /* HSE/3 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_4 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV4)   /* HSE/4 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_5 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV5)   /* HSE/5 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_6 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV6)   /* HSE/6 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_7 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV7)   /* HSE/7 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_8 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV8)   /* HSE/8 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_9 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV9)   /* HSE/9 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_10 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV10) /* HSE/10 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_11 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV11) /* HSE/11 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_12 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV12) /* HSE/12 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_13 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV13) /* HSE/13 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_14 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV14) /* HSE/14 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_15 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV15) /* HSE/15 clock selected as PLL entry clock source */
+#define LL_RCC_PLLSOURCE_HSE_DIV_16 (RCC_CFGR_PLLSRC_HSE_PREDIV | RCC_CFGR2_PREDIV_DIV16) /* HSE/16 clock selected as PLL entry clock source */
 
-#define LL_RCC_PLL_MUL_2 RCC_CFGR_PLLMUL2   /*!< PLL input clock*2 */
-#define LL_RCC_PLL_MUL_3 RCC_CFGR_PLLMUL3   /*!< PLL input clock*3 */
-#define LL_RCC_PLL_MUL_4 RCC_CFGR_PLLMUL4   /*!< PLL input clock*4 */
-#define LL_RCC_PLL_MUL_5 RCC_CFGR_PLLMUL5   /*!< PLL input clock*5 */
-#define LL_RCC_PLL_MUL_6 RCC_CFGR_PLLMUL6   /*!< PLL input clock*6 */
-#define LL_RCC_PLL_MUL_7 RCC_CFGR_PLLMUL7   /*!< PLL input clock*7 */
-#define LL_RCC_PLL_MUL_8 RCC_CFGR_PLLMUL8   /*!< PLL input clock*8 */
-#define LL_RCC_PLL_MUL_9 RCC_CFGR_PLLMUL9   /*!< PLL input clock*9 */
-#define LL_RCC_PLL_MUL_10 RCC_CFGR_PLLMUL10 /*!< PLL input clock*10 */
-#define LL_RCC_PLL_MUL_11 RCC_CFGR_PLLMUL11 /*!< PLL input clock*11 */
-#define LL_RCC_PLL_MUL_12 RCC_CFGR_PLLMUL12 /*!< PLL input clock*12 */
-#define LL_RCC_PLL_MUL_13 RCC_CFGR_PLLMUL13 /*!< PLL input clock*13 */
-#define LL_RCC_PLL_MUL_14 RCC_CFGR_PLLMUL14 /*!< PLL input clock*14 */
-#define LL_RCC_PLL_MUL_15 RCC_CFGR_PLLMUL15 /*!< PLL input clock*15 */
-#define LL_RCC_PLL_MUL_16 RCC_CFGR_PLLMUL16 /*!< PLL input clock*16 */
+#define LL_RCC_PLL_MUL_2 RCC_CFGR_PLLMUL2   /* PLL input clock*2 */
+#define LL_RCC_PLL_MUL_3 RCC_CFGR_PLLMUL3   /* PLL input clock*3 */
+#define LL_RCC_PLL_MUL_4 RCC_CFGR_PLLMUL4   /* PLL input clock*4 */
+#define LL_RCC_PLL_MUL_5 RCC_CFGR_PLLMUL5   /* PLL input clock*5 */
+#define LL_RCC_PLL_MUL_6 RCC_CFGR_PLLMUL6   /* PLL input clock*6 */
+#define LL_RCC_PLL_MUL_7 RCC_CFGR_PLLMUL7   /* PLL input clock*7 */
+#define LL_RCC_PLL_MUL_8 RCC_CFGR_PLLMUL8   /* PLL input clock*8 */
+#define LL_RCC_PLL_MUL_9 RCC_CFGR_PLLMUL9   /* PLL input clock*9 */
+#define LL_RCC_PLL_MUL_10 RCC_CFGR_PLLMUL10 /* PLL input clock*10 */
+#define LL_RCC_PLL_MUL_11 RCC_CFGR_PLLMUL11 /* PLL input clock*11 */
+#define LL_RCC_PLL_MUL_12 RCC_CFGR_PLLMUL12 /* PLL input clock*12 */
+#define LL_RCC_PLL_MUL_13 RCC_CFGR_PLLMUL13 /* PLL input clock*13 */
+#define LL_RCC_PLL_MUL_14 RCC_CFGR_PLLMUL14 /* PLL input clock*14 */
+#define LL_RCC_PLL_MUL_15 RCC_CFGR_PLLMUL15 /* PLL input clock*15 */
+#define LL_RCC_PLL_MUL_16 RCC_CFGR_PLLMUL16 /* PLL input clock*16 */
 
-#define LL_RCC_APB1_DIV_1 RCC_CFGR_PPRE1_DIV1   /*!< HCLK not divided */
-#define LL_RCC_APB1_DIV_2 RCC_CFGR_PPRE1_DIV2   /*!< HCLK divided by 2 */
-#define LL_RCC_APB1_DIV_4 RCC_CFGR_PPRE1_DIV4   /*!< HCLK divided by 4 */
-#define LL_RCC_APB1_DIV_8 RCC_CFGR_PPRE1_DIV8   /*!< HCLK divided by 8 */
-#define LL_RCC_APB1_DIV_16 RCC_CFGR_PPRE1_DIV16 /*!< HCLK divided by 16 */
+#define LL_RCC_APB1_DIV_1 RCC_CFGR_PPRE1_DIV1   /* HCLK not divided */
+#define LL_RCC_APB1_DIV_2 RCC_CFGR_PPRE1_DIV2   /* HCLK divided by 2 */
+#define LL_RCC_APB1_DIV_4 RCC_CFGR_PPRE1_DIV4   /* HCLK divided by 4 */
+#define LL_RCC_APB1_DIV_8 RCC_CFGR_PPRE1_DIV8   /* HCLK divided by 8 */
+#define LL_RCC_APB1_DIV_16 RCC_CFGR_PPRE1_DIV16 /* HCLK divided by 16 */
 
-#define LL_RCC_APB2_DIV_1 RCC_CFGR_PPRE2_DIV1   /*!< HCLK not divided */
-#define LL_RCC_APB2_DIV_2 RCC_CFGR_PPRE2_DIV2   /*!< HCLK divided by 2 */
-#define LL_RCC_APB2_DIV_4 RCC_CFGR_PPRE2_DIV4   /*!< HCLK divided by 4 */
-#define LL_RCC_APB2_DIV_8 RCC_CFGR_PPRE2_DIV8   /*!< HCLK divided by 8 */
-#define LL_RCC_APB2_DIV_16 RCC_CFGR_PPRE2_DIV16 /*!< HCLK divided by 16 */
+#define LL_RCC_APB2_DIV_1 RCC_CFGR_PPRE2_DIV1   /* HCLK not divided */
+#define LL_RCC_APB2_DIV_2 RCC_CFGR_PPRE2_DIV2   /* HCLK divided by 2 */
+#define LL_RCC_APB2_DIV_4 RCC_CFGR_PPRE2_DIV4   /* HCLK divided by 4 */
+#define LL_RCC_APB2_DIV_8 RCC_CFGR_PPRE2_DIV8   /* HCLK divided by 8 */
+#define LL_RCC_APB2_DIV_16 RCC_CFGR_PPRE2_DIV16 /* HCLK divided by 16 */
 
-#define LL_RCC_AHB_DIV_1 RCC_CFGR_HPRE_DIV1     /*!< SYSCLK not divided */
-#define LL_RCC_AHB_DIV_2 RCC_CFGR_HPRE_DIV2     /*!< SYSCLK divided by 2 */
-#define LL_RCC_AHB_DIV_4 RCC_CFGR_HPRE_DIV4     /*!< SYSCLK divided by 4 */
-#define LL_RCC_AHB_DIV_8 RCC_CFGR_HPRE_DIV8     /*!< SYSCLK divided by 8 */
-#define LL_RCC_AHB_DIV_16 RCC_CFGR_HPRE_DIV16   /*!< SYSCLK divided by 16 */
-#define LL_RCC_AHB_DIV_64 RCC_CFGR_HPRE_DIV64   /*!< SYSCLK divided by 64 */
-#define LL_RCC_AHB_DIV_128 RCC_CFGR_HPRE_DIV128 /*!< SYSCLK divided by 128 */
-#define LL_RCC_AHB_DIV_256 RCC_CFGR_HPRE_DIV256 /*!< SYSCLK divided by 256 */
-#define LL_RCC_AHB_DIV_512 RCC_CFGR_HPRE_DIV512 /*!< SYSCLK divided by 512 */
+#define LL_RCC_SYSCLK_DIV_1 RCC_CFGR_HPRE_DIV1     /* SYSCLK not divided */
+#define LL_RCC_SYSCLK_DIV_2 RCC_CFGR_HPRE_DIV2     /* SYSCLK divided by 2 */
+#define LL_RCC_SYSCLK_DIV_4 RCC_CFGR_HPRE_DIV4     /* SYSCLK divided by 4 */
+#define LL_RCC_SYSCLK_DIV_8 RCC_CFGR_HPRE_DIV8     /* SYSCLK divided by 8 */
+#define LL_RCC_SYSCLK_DIV_16 RCC_CFGR_HPRE_DIV16   /* SYSCLK divided by 16 */
+#define LL_RCC_SYSCLK_DIV_64 RCC_CFGR_HPRE_DIV64   /* SYSCLK divided by 64 */
+#define LL_RCC_SYSCLK_DIV_128 RCC_CFGR_HPRE_DIV128 /* SYSCLK divided by 128 */
+#define LL_RCC_SYSCLK_DIV_256 RCC_CFGR_HPRE_DIV256 /* SYSCLK divided by 256 */
+#define LL_RCC_SYSCLK_DIV_512 RCC_CFGR_HPRE_DIV512 /* SYSCLK divided by 512 */
 
-#define LL_RCC_SYS_CLKSOURCE_HSI RCC_CFGR_SW_HSI /*!< HSI selection as system clock */
-#define LL_RCC_SYS_CLKSOURCE_HSE RCC_CFGR_SW_HSE /*!< HSE selection as system clock */
-#define LL_RCC_SYS_CLKSOURCE_PLL RCC_CFGR_SW_PLL /*!< PLL selection as system clock */
+#define LL_RCC_AHB_DIV_1 RCC_CFGR_HPRE_DIV1     /* SYSCLK not divided */
+#define LL_RCC_AHB_DIV_2 RCC_CFGR_HPRE_DIV2     /* SYSCLK divided by 2 */
+#define LL_RCC_AHB_DIV_4 RCC_CFGR_HPRE_DIV4     /* SYSCLK divided by 4 */
+#define LL_RCC_AHB_DIV_8 RCC_CFGR_HPRE_DIV8     /* SYSCLK divided by 8 */
+#define LL_RCC_AHB_DIV_16 RCC_CFGR_HPRE_DIV16   /* SYSCLK divided by 16 */
+#define LL_RCC_AHB_DIV_64 RCC_CFGR_HPRE_DIV64   /* SYSCLK divided by 64 */
+#define LL_RCC_AHB_DIV_128 RCC_CFGR_HPRE_DIV128 /* SYSCLK divided by 128 */
+#define LL_RCC_AHB_DIV_256 RCC_CFGR_HPRE_DIV256 /* SYSCLK divided by 256 */
+#define LL_RCC_AHB_DIV_512 RCC_CFGR_HPRE_DIV512 /* SYSCLK divided by 512 */
 
-#define LL_RCC_SYS_CLKSOURCE_STATUS_HSI RCC_CFGR_SWS_HSI /*!< HSI used as system clock */
-#define LL_RCC_SYS_CLKSOURCE_STATUS_HSE RCC_CFGR_SWS_HSE /*!< HSE used as system clock */
-#define LL_RCC_SYS_CLKSOURCE_STATUS_PLL RCC_CFGR_SWS_PLL /*!< PLL used as system clock */
+#define LL_RCC_SYS_CLKSOURCE_HSI RCC_CFGR_SW_HSI /* HSI selection as system clock */
+#define LL_RCC_SYS_CLKSOURCE_HSE RCC_CFGR_SW_HSE /* HSE selection as system clock */
+#define LL_RCC_SYS_CLKSOURCE_PLL RCC_CFGR_SW_PLL /* PLL selection as system clock */
+
+#define LL_RCC_SYS_CLKSOURCE_STATUS_HSI RCC_CFGR_SWS_HSI /* HSI used as system clock */
+#define LL_RCC_SYS_CLKSOURCE_STATUS_HSE RCC_CFGR_SWS_HSE /* HSE used as system clock */
+#define LL_RCC_SYS_CLKSOURCE_STATUS_PLL RCC_CFGR_SWS_PLL /* PLL used as system clock */
+
+#define LL_RCC_USART1_CLKSOURCE_PCLK2 RCC_CFGR3_USART1SW_PCLK2   /* PCLK2 clock used as USART1 clock source */
+#define LL_RCC_USART1_CLKSOURCE_SYSCLK RCC_CFGR3_USART1SW_SYSCLK /* System clock selected as USART1 clock source */
+#define LL_RCC_USART1_CLKSOURCE_LSE RCC_CFGR3_USART1SW_LSE       /* LSE oscillator clock used as USART1 clock source */
+#define LL_RCC_USART1_CLKSOURCE_HSI RCC_CFGR3_USART1SW_HSI       /* HSI oscillator clock used as USART1 clock source */
+#define LL_RCC_USART2_CLKSOURCE_PCLK1 RCC_CFGR3_USART2SW_PCLK    /* PCLK1 clock used as USART2 clock source */
+#define LL_RCC_USART2_CLKSOURCE_SYSCLK RCC_CFGR3_USART2SW_SYSCLK /* System clock selected as USART2 clock source */
+#define LL_RCC_USART2_CLKSOURCE_LSE RCC_CFGR3_USART2SW_LSE       /* LSE oscillator clock used as USART2 clock source */
+#define LL_RCC_USART2_CLKSOURCE_HSI RCC_CFGR3_USART2SW_HSI       /* HSI oscillator clock used as USART2 clock source */
+#define LL_RCC_USART3_CLKSOURCE_PCLK1 RCC_CFGR3_USART3SW_PCLK    /* PCLK1 clock used as USART3 clock source */
+#define LL_RCC_USART3_CLKSOURCE_SYSCLK RCC_CFGR3_USART3SW_SYSCLK /* System clock selected as USART3 clock source */
+#define LL_RCC_USART3_CLKSOURCE_LSE RCC_CFGR3_USART3SW_LSE       /* LSE oscillator clock used as USART3 clock source */
+#define LL_RCC_USART3_CLKSOURCE_HSI RCC_CFGR3_USART3SW_HSI       /* HSI oscillator clock used as USART3 clock source */
 
 /**
  * @brief  Enable HSI oscillator
@@ -135,8 +158,8 @@ static inline bool ll_rcc_is_hsi_ready(void)
  */
 static inline void ll_rcc_config_pll(uint32_t source, uint32_t pll_mul)
 {
-  MODIFY_REG(RCC->CFGR, RCC_CFGR_PLLSRC | RCC_CFGR_PLLMUL, (source & RCC_CFGR_PLLSRC) | pll_mul);
-  MODIFY_REG(RCC->CFGR2, RCC_CFGR2_PREDIV, (source & RCC_CFGR2_PREDIV));
+  MODIFY_REG(RCC->CFGR, RCC_CFGR_PLLSRC | RCC_CFGR_PLLMUL, source | pll_mul);
+  MODIFY_REG(RCC->CFGR2, RCC_CFGR2_PREDIV, source);
 }
 
 /**
@@ -208,15 +231,15 @@ static inline void ll_rcc_set_ahb_prescaler(uint32_t prescaler)
 
 /**
  * @brief  Configure the system clock source
- * @param  Source This parameter can be one of the following values:
+ * @param  source This parameter can be one of the following values:
  *         @arg @ref LL_RCC_SYS_CLKSOURCE_HSI
  *         @arg @ref LL_RCC_SYS_CLKSOURCE_HSE
  *         @arg @ref LL_RCC_SYS_CLKSOURCE_PLL
  * @retval None
  */
-static inline void ll_rcc_set_sysclk_source(uint32_t Source)
+static inline void ll_rcc_set_sysclk_source(uint32_t source)
 {
-  MODIFY_REG(RCC->CFGR, RCC_CFGR_SW, Source);
+  MODIFY_REG(RCC->CFGR, RCC_CFGR_SW, source);
 }
 
 /**
@@ -229,6 +252,53 @@ static inline void ll_rcc_set_sysclk_source(uint32_t Source)
 static inline uint32_t ll_rcc_get_sysclk_source(void)
 {
   return READ_BIT(RCC->CFGR, RCC_CFGR_SWS);
+}
+
+/**
+ * @brief  Get APB1 prescaler
+ * @rmtoll CFGR         PPRE1         LL_RCC_GetAPB1Prescaler
+ * @retval Returned value can be one of the following values:
+ *         @arg @ref LL_RCC_APB1_DIV_1
+ *         @arg @ref LL_RCC_APB1_DIV_2
+ *         @arg @ref LL_RCC_APB1_DIV_4
+ *         @arg @ref LL_RCC_APB1_DIV_8
+ *         @arg @ref LL_RCC_APB1_DIV_16
+ */
+static inline uint32_t ll_rcc_get_apb1_prescaler(void)
+{
+  return READ_BIT(RCC->CFGR, RCC_CFGR_PPRE1);
+}
+
+/**
+ * @brief  Get APB2 prescaler
+ * @retval Returned value can be one of the following values:
+ *         @arg @ref LL_RCC_APB2_DIV_1
+ *         @arg @ref LL_RCC_APB2_DIV_2
+ *         @arg @ref LL_RCC_APB2_DIV_4
+ *         @arg @ref LL_RCC_APB2_DIV_8
+ *         @arg @ref LL_RCC_APB2_DIV_16
+ */
+static inline uint32_t ll_rcc_get_apb2_prescaler(void)
+{
+  return READ_BIT(RCC->CFGR, RCC_CFGR_PPRE2);
+}
+
+/**
+ * @brief  Get AHB prescaler
+ * @retval Returned value can be one of the following values:
+ *         @arg @ref LL_RCC_SYSCLK_DIV_1
+ *         @arg @ref LL_RCC_SYSCLK_DIV_2
+ *         @arg @ref LL_RCC_SYSCLK_DIV_4
+ *         @arg @ref LL_RCC_SYSCLK_DIV_8
+ *         @arg @ref LL_RCC_SYSCLK_DIV_16
+ *         @arg @ref LL_RCC_SYSCLK_DIV_64
+ *         @arg @ref LL_RCC_SYSCLK_DIV_128
+ *         @arg @ref LL_RCC_SYSCLK_DIV_256
+ *         @arg @ref LL_RCC_SYSCLK_DIV_512
+ */
+static inline uint32_t ll_rcc_get_ahb_prescaler(void)
+{
+  return READ_BIT(RCC->CFGR, RCC_CFGR_HPRE);
 }
 
 /**
@@ -293,7 +363,90 @@ static inline uint32_t ll_rcc_get_pll_multiplicator(void)
   return READ_BIT(RCC->CFGR, RCC_CFGR_PLLMUL);
 }
 
+/**
+ * @brief  Configure USART1 clock source
+ * @param  clock This parameter can be one of the following values:
+ *         @arg @ref LL_RCC_USART1_CLKSOURCE_PCLK2
+ *         @arg @ref LL_RCC_USART1_CLKSOURCE_SYSCLK
+ *         @arg @ref LL_RCC_USART1_CLKSOURCE_LSE
+ *         @arg @ref LL_RCC_USART1_CLKSOURCE_HSI
+ * @retval None
+ */
+static inline void ll_rcc_set_usart1_clock_source(uint32_t clock)
+{
+  MODIFY_REG(RCC->CFGR3, RCC_CFGR3_USART1SW, clock);
+}
+/**
+ * @brief  Configure USART2 clock source
+ * @param  clock This parameter can be one of the following values:
+ *         @arg @ref LL_RCC_USART2_CLKSOURCE_PCLK1
+ *         @arg @ref LL_RCC_USART2_CLKSOURCE_SYSCLK
+ *         @arg @ref LL_RCC_USART2_CLKSOURCE_LSE
+ *         @arg @ref LL_RCC_USART2_CLKSOURCE_HSI
+ * @retval None
+ */
+static inline void ll_rcc_set_usart2_clock_source(uint32_t clock)
+{
+  MODIFY_REG(RCC->CFGR3, RCC_CFGR3_USART2SW, clock);
+}
+/**
+ * @brief  Configure USART3 clock source
+ * @param  clock This parameter can be one of the following values:
+ *         @arg @ref LL_RCC_USART3_CLKSOURCE_PCLK1
+ *         @arg @ref LL_RCC_USART3_CLKSOURCE_SYSCLK
+ *         @arg @ref LL_RCC_USART3_CLKSOURCE_LSE
+ *         @arg @ref LL_RCC_USART3_CLKSOURCE_HSI
+ * @retval None
+ */
+static inline void ll_rcc_set_usart3_clock_source(uint32_t clock)
+{
+  MODIFY_REG(RCC->CFGR3, RCC_CFGR3_USART3SW, clock);
+}
+
+/**
+ * @brief  Get USART1 clock source
+ * @retval Returned value can be one of the following values:
+ *         @arg @ref LL_RCC_USART1_CLKSOURCE_PCLK2
+ *         @arg @ref LL_RCC_USART1_CLKSOURCE_SYSCLK
+ *         @arg @ref LL_RCC_USART1_CLKSOURCE_LSE
+ *         @arg @ref LL_RCC_USART1_CLKSOURCE_HSI
+ */
+static inline uint32_t ll_rcc_get_usart1_clock_source(void)
+{
+  return READ_BIT(RCC->CFGR3, RCC_CFGR3_USART1SW);
+}
+
+/**
+ * @brief  Get USART2 clock source
+ * @retval Returned value can be one of the following values:
+ *         @arg @ref LL_RCC_USART2_CLKSOURCE_PCLK1
+ *         @arg @ref LL_RCC_USART2_CLKSOURCE_SYSCLK
+ *         @arg @ref LL_RCC_USART2_CLKSOURCE_LSE
+ *         @arg @ref LL_RCC_USART2_CLKSOURCE_HSI
+ */
+static inline uint32_t ll_rcc_get_usart2_clock_source(void)
+{
+  return READ_BIT(RCC->CFGR3, RCC_CFGR3_USART2SW);
+}
+
+/**
+ * @brief  Get USART3 clock source
+ * @retval Returned value can be one of the following values:
+ *         @arg @ref LL_RCC_USART3_CLKSOURCE_PCLK1
+ *         @arg @ref LL_RCC_USART3_CLKSOURCE_SYSCLK
+ *         @arg @ref LL_RCC_USART3_CLKSOURCE_LSE
+ *         @arg @ref LL_RCC_USART3_CLKSOURCE_HSI
+ */
+static inline uint32_t ll_rcc_get_usart3_clock_source(void)
+{
+  return READ_BIT(RCC->CFGR3, RCC_CFGR3_USART3SW);
+}
+
 uint32_t ll_rcc_get_pll_frequency(void);
 uint32_t ll_rcc_get_sysclk_frequency(void);
+uint32_t ll_rcc_get_hclk_frequency(void);
+uint32_t ll_rcc_get_pclk1_frequency(void);
+uint32_t ll_rcc_get_pclk2_frequency(void);
+uint32_t ll_rcc_get_usart_frequency(USART_TypeDef *usart);
 
 #endif /* LL_RCC_H */

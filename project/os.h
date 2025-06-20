@@ -25,6 +25,7 @@ struct os_context
     uint32_t current_thread_index;
 };
 
+void os_init(void);
 void os_launch(void);
 void os_schedule(void);
 void os_delay(uint32_t ticks);

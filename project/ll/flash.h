@@ -5,9 +5,9 @@
 #include "stm32f3.h"
 #include "utils.h"
 
-#define LL_FLASH_LATENCY_0 0x00000000U         /*!< FLASH Zero Latency cycle */
-#define LL_FLASH_LATENCY_1 FLASH_ACR_LATENCY_0 /*!< FLASH One Latency cycle */
-#define LL_FLASH_LATENCY_2 FLASH_ACR_LATENCY_1 /*!< FLASH Two Latency cycles */
+#define LL_FLASH_LATENCY_0 0x00000000U         /* FLASH Zero Latency cycle */
+#define LL_FLASH_LATENCY_1 FLASH_ACR_LATENCY_0 /* FLASH One Latency cycle */
+#define LL_FLASH_LATENCY_2 FLASH_ACR_LATENCY_1 /* FLASH Two Latency cycles */
 
 /**
  * @brief  Set FLASH Latency

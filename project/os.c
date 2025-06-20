@@ -17,6 +17,14 @@ static volatile uint64_t _ticks = 0;
 static struct os_thread _idle_thread = {0};
 static uint32_t _idle_thread_stack[IDLE_STACK_SIZE] = {0};
 
+void os_init(void)
+{
+  __NVIC_SetPriorityGrouping(7 - __NVIC_PRIO_BITS); // Use all bits for preemptive priority (no subpriority), enabling 2^__NVIC_PRIO_BITS priority levels
+  __NVIC_SetPriority(PendSV_IRQn, 15);
+  __NVIC_SetPriority(SVCall_IRQn, 14);
+  __NVIC_SetPriority(SysTick_IRQn, 13);
+}
+
 void os_launch(void)
 {
   _idle_thread.sp = &_idle_thread_stack[IDLE_STACK_SIZE - 1];
@@ -38,11 +46,6 @@ void os_launch(void)
   *(_idle_thread.sp) = 0x04040404;                    /* R4 */
 
   __disable_irq();
-
-  __NVIC_SetPriorityGrouping(7 - __NVIC_PRIO_BITS); // Use all bits for preemptive priority (no subpriority), enabling 2^__NVIC_PRIO_BITS priority levels
-  __NVIC_SetPriority(PendSV_IRQn, 15);
-  __NVIC_SetPriority(SVCall_IRQn, 14);
-  __NVIC_SetPriority(SysTick_IRQn, 13);
 
   /* Configure the SysTick to have interrupt in 1ms time base */
   SysTick->LOAD = (uint32_t)((ll_rcc_get_sysclk_frequency() / OS_TICK_FREQUENCY) - 1UL); /* set reload register */
